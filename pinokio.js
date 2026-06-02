@@ -1,3 +1,5 @@
+const SEARXNG_REPO_URI = "https://github.com/cocktailpeanut/searxng.pinokio.git"
+
 module.exports = {
   version: "7.0",
   title: "Odysseus",
@@ -8,7 +10,7 @@ module.exports = {
     href: "https://github.com/pewdiepie-archdaemon/odysseus"
   }],
   menu: async (kernel, info) => {
-    let installed = info.exists("app/env")
+    let installed = info.exists("app/env") && kernel.script.exists(SEARXNG_REPO_URI, "app", "env")
     let running = {
       install: info.running("install.js"),
       start: info.running("start.js"),

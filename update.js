@@ -1,3 +1,6 @@
+const SEARXNG_REPO_URI = "https://github.com/cocktailpeanut/searxng.pinokio.git"
+const SEARXNG_UPDATE_URI = `${SEARXNG_REPO_URI}/update.js`
+
 module.exports = {
   requires: {
     bundle: "ai"
@@ -26,6 +29,13 @@ module.exports = {
           "uv pip install -r requirements.txt",
           "python setup.py"
         ]
+      }
+    },
+    {
+      when: `{{script.exists('${SEARXNG_REPO_URI}', 'update.js')}}`,
+      method: "script.run",
+      params: {
+        uri: SEARXNG_UPDATE_URI
       }
     }
   ]
