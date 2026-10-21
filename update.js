@@ -1,3 +1,5 @@
+const APP_REPO_URI = "https://github.com/kamweck-cjk/odysseus.git"
+const UPSTREAM_REPO_URI = "https://github.com/odysseus-dev/odysseus.git"
 const SEARXNG_REPO_URI = "https://github.com/cocktailpeanut/searxng.pinokio.git"
 const SEARXNG_UPDATE_URI = `${SEARXNG_REPO_URI}/update.js`
 
@@ -16,7 +18,10 @@ module.exports = {
       method: "shell.run",
       params: {
         path: "app",
-        message: "git pull"
+        message: [
+          `git remote get-url upstream || git remote add upstream ${UPSTREAM_REPO_URI}`,
+          "git pull"
+        ]
       }
     },
     {

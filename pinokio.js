@@ -1,13 +1,15 @@
+const APP_REPO_URL = "https://github.com/kamweck-cjk/odysseus"
+const LAUNCHER_REPO_URL = "https://github.com/kamweck-cjk/odysseus.pinokio"
 const SEARXNG_REPO_URI = "https://github.com/cocktailpeanut/searxng.pinokio.git"
 
 module.exports = {
   version: "7.0",
-  title: "Odysseus",
-  description: "Self-hosted AI workspace with chat, agents, tools, memory, research, documents, email, and model endpoint management.",
+  title: "Odysseus (Low GPU)",
+  description: "Self-hosted AI workspace with chat, agents, tools, memory, research, documents, email, and model endpoint management — tuned for low VRAM / low RAM machines.",
   icon: "icon.jpg",
   links: [{
     text: "GitHub",
-    href: "https://github.com/pewdiepie-archdaemon/odysseus"
+    href: APP_REPO_URL
   }],
   menu: async (kernel, info) => {
     let installed = info.exists("app/env") && kernel.script.exists(SEARXNG_REPO_URI, "app", "env")
@@ -15,6 +17,7 @@ module.exports = {
       install: info.running("install.js"),
       start: info.running("start.js"),
       update: info.running("update.js"),
+      sync: info.running("sync.js"),
       reset: info.running("reset.js")
     }
     if (running.install) {
@@ -41,7 +44,7 @@ module.exports = {
           }, {
             icon: "fa-brands fa-github",
             text: "GitHub",
-            href: "https://github.com/pewdiepie-archdaemon/odysseus"
+            href: APP_REPO_URL
           }]
         } else {
           return [{
@@ -57,6 +60,13 @@ module.exports = {
           icon: "fa-solid fa-arrows-rotate",
           text: "Updating",
           href: "update.js",
+        }]
+      } else if (running.sync) {
+        return [{
+          default: true,
+          icon: "fa-solid fa-code-merge",
+          text: "Syncing",
+          href: "sync.js",
         }]
       } else if (running.reset) {
         return [{
@@ -76,6 +86,10 @@ module.exports = {
           text: "Update",
           href: "update.js",
         }, {
+          icon: "fa-solid fa-code-merge",
+          text: "Sync with Upstream",
+          href: "sync.js",
+        }, {
           icon: "fa-solid fa-plug",
           text: "Install",
           href: "install.js",
@@ -86,7 +100,11 @@ module.exports = {
         }, {
           icon: "fa-brands fa-github",
           text: "GitHub",
-          href: "https://github.com/pewdiepie-archdaemon/odysseus"
+          href: APP_REPO_URL
+        }, {
+          icon: "fa-brands fa-github",
+          text: "Launcher",
+          href: LAUNCHER_REPO_URL
         }]
       }
     } else {

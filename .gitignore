@@ -1,0 +1,20 @@
+# Cloned application source (managed by install.js / update.js / sync.js)
+app/
+
+# Runtime state
+logs/
+cache/
+
+# Local environment / secrets
+.env
+.env.bak.*
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# OS
+.DS_Store
+Thumbs.db
