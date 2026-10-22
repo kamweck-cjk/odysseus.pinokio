@@ -12,11 +12,17 @@ const UPSTREAM_REPO_URI = "https://github.com/odysseus-dev/odysseus.git"
 module.exports = {
   run: [
     {
+      // Make sure the upstream remote points at the canonical repo. `git
+      // config` is idempotent and always exits 0, unlike `git remote add`,
+      // which fails once the remote already exists. The `||` shell construct
+      // is avoided deliberately: it stalls Pinokio's shell.run when it
+      // follows a failing git command.
       method: "shell.run",
       params: {
         path: "app",
         message: [
-          `git remote get-url upstream || git remote add upstream ${UPSTREAM_REPO_URI}`,
+          `git config remote.upstream.url ${UPSTREAM_REPO_URI}`,
+          "git config remote.upstream.fetch +refs/heads/dev:refs/remotes/upstream/dev",
           "git fetch upstream dev",
           "git merge --no-edit upstream/dev"
         ]

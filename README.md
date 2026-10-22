@@ -22,6 +22,12 @@ Odysseus itself does not require a GPU just to launch. GPU, VRAM, RAM, and disk 
 
 On Linux and Termux, upstream notes that Cookbook background downloads and model serving require `tmux`. Core chat and workspace features can still connect to external model endpoints.
 
+### Admin credentials
+
+The launcher starts the app with `AUTH_ENABLED=false` and stamps requests as the local admin user, so **no login is required** to use the web UI.
+
+`setup.py` normally asks for an admin username and password on an interactive terminal. A Pinokio shell can never answer that prompt, so the installer generates the password itself instead: it is written to `app/data/.admin_password` and echoed into the install log. The admin user name is `admin`. If you later switch auth back on, read the password from `app/data/.admin_password`, or set `ODYSSEUS_ADMIN_USER` / `ODYSSEUS_ADMIN_PASSWORD` in `app/.env`, delete `app/data/auth.json`, and re-run `python setup.py` inside `app`.
+
 ---
 
 ## The low-resource feature
