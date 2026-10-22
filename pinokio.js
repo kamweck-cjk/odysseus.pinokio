@@ -4,8 +4,8 @@ const SEARXNG_REPO_URI = "https://github.com/cocktailpeanut/searxng.pinokio.git"
 
 module.exports = {
   version: "7.0",
-  title: "Odysseus (Low GPU)",
-  description: "Self-hosted AI workspace with chat, agents, tools, memory, research, documents, email, and model endpoint management — tuned for low VRAM / low RAM machines.",
+  title: "Dolphin",
+  description: "Dolphin — a self-hosted AI workspace with chat, agents, tools, memory, research, documents, email, and model endpoint management, tuned for low VRAM / low RAM machines.",
   icon: "icon.jpg",
   links: [{
     text: "GitHub",

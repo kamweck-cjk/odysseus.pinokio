@@ -1,4 +1,6 @@
-# Odysseus (Low GPU) — Pinokio Launcher
+# Dolphin — Pinokio Launcher
+
+> A leaping dolphin emblem in the *Skies of Arcadia* ocean palette. The app itself is still called **Odysseus** underneath — see [Branding](#branding).
 
 Installs and runs [Odysseus](https://github.com/kamweck-cjk/odysseus), a self-hosted AI workspace with chat, agents, MCP tools, memory, documents, deep research, email/calendar workflows, and model endpoint management.
 
@@ -65,7 +67,7 @@ User data, logs, `.env`, databases, uploads, generated images, and cloned app fi
 
 ## API
 
-Odysseus exposes a FastAPI backend under the same URL shown by **Open Web UI**. In Pinokio local-launch mode, the launcher disables Odysseus auth at runtime and stamps requests as the local admin user. Programmatic calls to the Pinokio URL do not need a login cookie.
+The backend exposes a FastAPI server under the same URL shown by **Open Web UI**. In Pinokio local-launch mode, the launcher disables Odysseus auth at runtime and stamps requests as the local admin user. Programmatic calls to the Pinokio URL do not need a login cookie.
 
 Replace `PORT` with the port displayed by Pinokio after startup.
 
@@ -161,3 +163,22 @@ curl http://127.0.0.1:PORT/api/models
 | [`odysseus-dev/odysseus`](https://github.com/odysseus-dev/odysseus) | Upstream. Wired into the app clone as the `upstream` remote and merged in by **Sync with Upstream**. |
 
 The app fork is AGPL-3.0, as upstream is.
+
+---
+
+## Branding
+
+**Dolphin** is the launcher/product name — it is what Pinokio shows in the sidebar, and it is the name of this repository's icon. The name comes from the dolphin emblem of *Skies of Arcadia* (Sega / Overworks, 2000), whose stylised leaping dolphin over a blue ocean is the visual reference for the icon's palette and pose.
+
+Deliberately **not** renamed:
+
+- The application code still identifies itself as `Odysseus` — HTTP headers (`X-Odysseus-*`), environment variables, database and settings keys, the TOTP issuer, and the web UI wordmark.
+- The git repositories keep their `odysseus` names.
+
+The reason is upstream sync: **Sync with Upstream** merges `odysseus-dev/odysseus@dev` into this fork on a recurring basis. Renaming internal identifiers would turn every upstream merge into a conflict, and renaming the repositories would break the remote wiring the sync script depends on. The Dolphin name therefore lives at the launcher layer, where it is what a user actually sees.
+
+### Icon artwork
+
+`icon.jpg` (512×512) is original artwork produced for this fork: a public-domain/CC0 dolphin silhouette ([Wikimedia Commons — *Dolphin silhouette 2*](https://commons.wikimedia.org/wiki/File:Dolphin_silhouette_2.png), CC0 1.0) rotated into a leaping pose, recoloured with a *Skies of Arcadia* ocean gradient (vivid blue → cyan over deep ocean), and composited over sea swells.
+
+No Sega/Overworks artwork or wordmark is included. *Skies of Arcadia* and its dolphin emblem remain the property of Sega/Overworks — this icon is a fan-made homage, which is fine for personal use but should not be redistributed as an official product asset.
